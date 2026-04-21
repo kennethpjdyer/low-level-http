@@ -6,6 +6,10 @@ bind_tcp_port(
    tcp_server* server,
    int port
 ){
+   if (port < 0 || port > 65535) {
+      debug_log("Port out of range");
+      return SERVER_SOCKET_ERROR;
+   }
    memset(server, 0, sizeof(*server));
    server->socket_fd = socket(AF_INET, SOCK_STREAM, 0);
    if (server->socket_fd == -1){
@@ -50,6 +54,5 @@ accept_client
    }
 
    return client_fd;
-
 }
 

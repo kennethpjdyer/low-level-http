@@ -11,6 +11,9 @@ TARGET = $(BIN_DIR)/myhttpd
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
+compile_commands.json: clean
+	bear -- make all
+
 all: $(TARGET)
 
 $(TARGET): $(OBJ_FILES) | $(BIN_DIR)
@@ -26,4 +29,4 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 clean:
-	rm -rf $(OBJ_DIR) $(BIN_DIR)
+	rm -rf $(OBJ_DIR) $(BIN_DIR) compile_commands.json
